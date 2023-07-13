@@ -3,24 +3,22 @@ sudo: required
 services:
   - docker
 
-language: node_js
-
-# before_install:
-#   - docker build -f Dockerfile.dev -t ademola123/front .
+before_install:
+  - docker build -f Dockerfile.dev -t ademola123/front .
 
 script:
-  - echo "THis will be logged to the console." | console.log
-#   - docker run -e CI=true ademola123/front npm run test -- --coverage
-# deploy:
-#   provider: elasticbeanstalk
-#   region: "us-west-2"
-#   app: "docker-react"
-#   env: "Docker-react-env"
-#   bucket_name: "elasticbeanstalk-us-west-2-130002661268"
-#   bucket_path: "docker-react"
-#   on:
-#     branch: master
-#   access_key_id:
-#     secure: $env[AWS_ACCESS_KEY]
-#   secret_access_key:
-#     secure: $env[AWS_SECRET_KEY]
+  - docker run -e CI=true ademola123/front npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  edge: true
+  region: "us-west-2"
+  app: "docker-react"
+  env: "Docker-react-env"
+  bucket_name: "elasticbeanstalk-us-west-2-130002661268"
+  bucket_path: "docker-react"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
