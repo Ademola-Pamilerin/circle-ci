@@ -3,13 +3,14 @@ sudo: required
 services:
   - docker
 
-before_install:
-  - docker build -f Dockerfile.dev -t ademola123/front .
+language: node_js
+
+# before_install:
+#   - docker build -f Dockerfile.dev -t ademola123/front .
 
 script:
-  - echo "The value of the environment variable MY_ENV_VAR is: $env[AWS_ACCESS_KEY]"
-  - echo "The value of the environment variable MY_ENV_VAR is 2: $AWS_ACCESS_KEY"
-  # - docker run -e CI=true ademola123/front npm run test -- --coverage
+  - echo "THis will be logged to the console." | console.log
+#   - docker run -e CI=true ademola123/front npm run test -- --coverage
 # deploy:
 #   provider: elasticbeanstalk
 #   region: "us-west-2"
